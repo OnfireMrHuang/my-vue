@@ -8,7 +8,13 @@
   <div id="app">
     {{ message }}
     <div :id="message">
-      <todo-list></todo-list>
+      <todo-list>
+        <todo-item v-for='item in list' :title='item.title' :del='item.del'>
+          <template v-slot:pre-icon='{value}'>
+            <span>前置图标 {{value}}</span>
+          </template>
+        </todo-item>
+      </todo-list>
     </div>
   </div>
 
@@ -24,14 +30,18 @@
         },
         template:`
           <li>
+              <slot name='pre-icon' :value="value"></slot>
               <span v-if="!del">{{title}}</span>
               <span v-else style="text-decoration: line-through;">{{title}}</span>
-              <button v-show="!del" @click.stop='handleClick'>删除</button>
+              <slot name='suf-icon'></slot>
+              <button v-show="!del" @click='handleClick'>删除</button>
           </li>
           `
         ,
         data:function() {
-          return {}
+          return {
+            value: Math.random(),
+          }
         },
         methods:{
           handleClick() {
@@ -44,22 +54,11 @@
     Vue.component('todo-list',{
       template:`
         <ul>
-          <todo-item @delete="handleDelete" v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+          <slot></slot>
         </ul>
       `,
       data:function() {
-        return {
-          list:[
-            {
-              title:"课程1",
-              del:false,
-            },
-            {
-              title:"课程2",
-              del:false,
-            }
-          ]
-        }
+        return {}
       },
       methods:{
         handleDelete(val){
@@ -72,6 +71,16 @@
       el: '#app',
       data: {
           message: 'Hello Vue!',
+          list:[
+            {
+              title:"课程1",
+              del:false,
+            },
+            {
+              title:"课程2",
+              del:false,
+            }
+          ]
         }
     })
   </script>
