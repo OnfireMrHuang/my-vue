@@ -15,9 +15,9 @@ export default {
         return {
             list: [
                 {
-                    key: "1.5",
-                    name: "合理应用计算属性和侦听器"
-                }
+                  key: "1.5",
+                  name: "合理应用计算属性和侦听器"
+                },
             ],
         }
     }
