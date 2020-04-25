@@ -26,6 +26,10 @@ export default {
                   key: "1.7",
                   name: "指令的本质"
                 },
+                {
+                  key: "1.8",
+                  name: "常用高级特性provide、inject"
+                }
             ],
         }
     }
