@@ -29,7 +29,11 @@ export default {
                 {
                   key: "1.8",
                   name: "常用高级特性provide、inject"
-                }
+                },
+                {
+                  key: "1.9",
+                  name: "如何优雅的获取跨层级组件实例"
+                },
             ],
         }
     }
