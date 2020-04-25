@@ -34,11 +34,27 @@ export default {
                   key: "1.9",
                   name: "如何优雅的获取跨层级组件实例"
                 },
+                {
+                  key: "1.10",
+                  name: "template、JSX对比"
+                }
             ],
         }
     }
 }
 </script>
 
+<style lang="less">
+#nav {
+  padding: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>
 
 
