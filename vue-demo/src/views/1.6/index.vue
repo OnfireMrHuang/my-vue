@@ -7,7 +7,7 @@
         </button>
         <Clock v-if="!destroyClock" />
       </a-tab-pane>
-      <!-- <a-tab-pane key="Functional" tab="函数式组件">
+      <a-tab-pane key="Functional" tab="函数式组件">
         <Functional :name="name" />
         <TempVar
           :var1="`hello ${name}`"
@@ -18,20 +18,20 @@
             {{ var2 }}
           </template>
         </TempVar>
-      </a-tab-pane> -->
+      </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 
 <script>
-// import Functional from "./Functional";
-// import TempVar from "./TempVar";
+import Functional from "./Functional";
+import TempVar from "./TempVar";
 import Clock from "./Clock"
 export default {
   components: {
     Clock,
-    // Functional,
-    // TempVar
+    Functional,
+    TempVar
   },
   data() {
     return {
