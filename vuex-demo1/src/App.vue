@@ -1,23 +1,25 @@
 <template>
   <div id="app">
-    <h2>it's my test</h2>
-    {{count}}
-    <br>
-    {{$store.getters.doubleCount}}
-    <br>
-    <button @click="$store.commit('increment',2)">count++</button>
-    <button @click="$store.dispatch('increment')">count++</button>
+    <h1>购物车示例</h1>
+    <p>账号: {{email}}</p>
+    <hr>
+    <h2>产品</h2>
+    <!-- 产品列表 -->
+    <hr>
+    <!-- 购物车 -->
   </div>
 </template>
 
 <script>
+import { mapState} from "vuex"
+import ProductList from "./components/ProductList.vue"
+import ShoppingCart from "./components/ShoppingCart.vue"
 
 export default {
   name: 'App',
-  computed:{
-    count() {
-      return this.$store.state.count
-    }
-  }
+  computed:mapState({
+    email: state => state.userInfo.email
+  }),
+  components: {ProductList,ShoppingCart}
 }
 </script>
