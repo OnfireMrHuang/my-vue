@@ -5,8 +5,11 @@
     <hr>
     <h2>产品</h2>
     <!-- 产品列表 -->
+    <ProductList/>
     <hr>
+    <h2>购物车</h2>
     <!-- 购物车 -->
+    <ShoppingCart/>
   </div>
 </template>
 
