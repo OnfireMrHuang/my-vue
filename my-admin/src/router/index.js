@@ -3,10 +3,17 @@ import VueRouter from "vue-router";
 import LayoutUser from "../components/layout/userLayout";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import Layout from "../layouts/BasicLayout";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/",
+    component: Layout,
+    name: "home",
+    hidden: true
+  },
   {
     path: "/user",
     component: LayoutUser,
