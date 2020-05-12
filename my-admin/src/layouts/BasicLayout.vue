@@ -1,8 +1,14 @@
 <template>
-  <div>
+  <div class="[`nav-theme-${navTheme}`,`nav-layout-${navLayout}`]">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-      <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-        <div class="logo" />
+      <a-layout-sider
+        v-if="navLayout === 'left'"
+        :theme="navTheme"
+        :trigger="null"
+        collapsible
+        v-model="collapsed"
+      >
+        <div class="logo">admin</div>
         <SiderMenu />
       </a-layout-sider>
       <a-layout>
@@ -42,6 +48,14 @@ export default {
     Footer,
     SiderMenu,
     SettintDrawer
+  },
+  computed: {
+    navTheme() {
+      return this.$route.query.navTheme;
+    },
+    navLayout() {
+      return this.$route.query.navLayout;
+    }
   }
 };
 </script>
@@ -55,5 +69,14 @@ export default {
 }
 .trigger:hover {
   background: #eeeeee;
+}
+.logo {
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  overflow: hidden;
+}
+.nav-theme-dark >>> .logo {
+  color: #ffffff;
 }
 </style>
