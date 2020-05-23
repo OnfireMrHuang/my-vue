@@ -34,12 +34,8 @@ const routes = [
   {
     path: "/",
     component: Layout,
+    redirect: "/dashboard",
     children: [
-      //dashboard
-      {
-        path: "/",
-        redirect: "/dashboard/analysis"
-      },
       {
         path: "/dashboard",
         name: "dashboard",
@@ -48,9 +44,9 @@ const routes = [
         children: [
           {
             path: "/dashboard/analysis",
-            meta: {title: "分析页"},
+            meta: { title: "分析页" },
             name: "analysis",
-            component: () => import("./views/Dashboard/Analysis")
+            component: () => import("../views/Dashboard/Analysis")
           }
         ]
       }
@@ -60,21 +56,20 @@ const routes = [
     path: "/form",
     name: "form",
     component: { render: h => h("router-view") },
-    meta: {icon: 'form', title: "表单"},
+    meta: { icon: "form", title: "表单" },
     children: [
       {
         path: "form/basic-form",
         name: "basicform",
         meta: { title: "基础表单" },
-        component: () => import("./views/Forms/BasicForm")
+        component: () => import("../views/Forms/BasicForm")
       },
       {
         path: "/form/step-form",
         name: "stepform",
         hideInChildrenMenu: true,
         meta: { title: "分布表单" },
-        component: () => import("./views/Forms/stepForm"),
-        children: [{}]
+        component: () => import("../views/Forms/stepForm")
       }
     ]
   },
