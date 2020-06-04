@@ -1,16 +1,16 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 import LayoutUser from "../components/layout/userLayout";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Layout from "../layouts/BasicLayout";
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
 const routes = [
   {
     path: "/user",
-    hideInMenu: true,
+    hideInMenu: true, // 在菜单中会被过滤掉
     component: LayoutUser,
     redirect: "/user/login",
     hidden: true,
@@ -34,8 +34,11 @@ const routes = [
   {
     path: "/",
     component: Layout,
-    redirect: "/dashboard",
     children: [
+      {
+        path: "/",
+        redirect: "/dashboard/analysis"
+      },
       {
         path: "/dashboard",
         name: "dashboard",
@@ -59,7 +62,7 @@ const routes = [
     meta: { icon: "form", title: "表单" },
     children: [
       {
-        path: "form/basic-form",
+        path: "/form/basic-form",
         name: "basicform",
         meta: { title: "基础表单" },
         component: () => import("../views/Forms/BasicForm")
@@ -67,7 +70,7 @@ const routes = [
       {
         path: "/form/step-form",
         name: "stepform",
-        hideInChildrenMenu: true,
+        hideInChildrenMenu: true, // 子路由隐藏掉
         meta: { title: "分布表单" },
         component: () => import("../views/Forms/stepForm")
       }
@@ -76,12 +79,12 @@ const routes = [
   {
     path: "*",
     redirect: "/404",
-    hideInMenu: true,
+    hideChildrenInMenu: true,
     hidden: true
   }
 ];
 
-const router = new VueRouter({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes

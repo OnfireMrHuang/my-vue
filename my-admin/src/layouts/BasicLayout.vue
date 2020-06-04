@@ -10,7 +10,7 @@
         width="256px"
       >
         <div class="logo">admin</div>
-        <SiderMenu />
+        <SiderMenu :theme="navTheme" />
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
