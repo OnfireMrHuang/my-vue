@@ -1,14 +1,20 @@
 <template>
   <div style="width: 256px">
     <a-menu
-      :default-selected-keys="['1']"
-      :default-open-keys="['2']"
+      :selectedKeys="selectedKeys"
+      :openKeys.sync="openKeys"
       mode="inline"
       :theme="theme"
       :inline-collapsed="collapsed"
     >
       <template v-for="item in menuData">
-        <a-menu-item v-if="!item.children" :key="item.path">
+        <a-menu-item
+          v-if="!item.children"
+          :key="item.path"
+          @click="
+            () => parent.$router.push({ path: item.path, query: $route.query })
+          "
+        >
           <a-icon
             v-if="item.meta.icon"
             :type="item.meta.icon"
@@ -24,6 +30,7 @@
 
 <script>
 import SubMenu from "./SubMenu";
+import { check } from "../utils/auth";
 
 export default {
   props: {
@@ -35,25 +42,48 @@ export default {
   components: {
     "sub-menu": SubMenu
   },
+  watch: {
+    "$route.path": function(val) {
+      this.selectedKeys = this.selectedKeysMap[val];
+      this.openKeys = this.collapsed ? [] : this.openKeysMap[val];
+    }
+  },
   data() {
+    this.selectedKeysMap = {};
+    this.openKeysMap = {};
     const menuData = this.getMenuData(this.$router.options.routes);
     return {
       collapsed: false,
-      list: [],
-      menuData
+      menuData,
+      selectedKeys: this.selectedKeysMap[this.$route.path],
+      openKeys: this.collapsed ? [] : this.openKeysMap[this.$route.path]
     };
   },
   methods: {
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
     },
-    getMenuData(routes) {
+    getMenuData(routes, parentKeys = [], selectedKey) {
       const menuData = [];
-      routes.forEach(item => {
+      for (let item of routes) {
+        if (item.meta && item.meta.authority && !check(item.meta.authority)) {
+          break;
+        }
         if (item.name && !item.hideInMenu) {
+          this.openKeysMap[item.path] = parentKeys;
+          this.selectedKeysMap[item.path] = [item.path || selectedKey];
           const newItem = { ...item };
           if (item.collapsed && !item.hideChildrenInMenu) {
-            newItem.children = this.getMenuData(item.children);
+            newItem.children = this.getMenuData(item.children, [
+              ...parentKeys,
+              item.path
+            ]);
+          } else {
+            this.getMenuData(
+              item.children,
+              selectedKey ? parentKeys : [...parentKeys, item.path],
+              selectedKey || item.path
+            );
           }
           menuData.push(newItem);
         } else if (
@@ -63,8 +93,8 @@ export default {
         ) {
           menuData.push(...this.getMenuData(item.children));
         }
-      });
-      return menuData;
+        return menuData;
+      }
     }
   }
 };
