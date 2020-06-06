@@ -9,7 +9,7 @@
         v-model="collapsed"
         width="256px"
       >
-        <div class="logo">admin</div>
+        <div class="logo">管理后台</div>
         <SiderMenu :theme="navTheme" />
       </a-layout-sider>
       <a-layout>
@@ -72,8 +72,10 @@ export default {
   background: #eeeeee;
 }
 .logo {
-  height: 64px;
+  height: 128px;
   line-height: 64px;
+  font-size: 20px;
+  color: rgb(50, 124, 4);
   text-align: center;
   overflow: hidden;
 }

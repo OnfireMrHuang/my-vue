@@ -93,8 +93,8 @@ export default {
         ) {
           menuData.push(...this.getMenuData(item.children));
         }
-        return menuData;
       }
+      return menuData;
     }
   }
 };

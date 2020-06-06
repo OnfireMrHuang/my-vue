@@ -1,5 +1,5 @@
 <template>
-  <div>analysis</div>
+  <div>分析页</div>
 </template>
 
 <script>

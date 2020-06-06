@@ -4,11 +4,11 @@ import findLast from "lodash/findLast";
 import LayoutUser from "../components/layout/userLayout";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import {notification} from "ant-design-vue";
+import { notification } from "ant-design-vue";
 import Layout from "../layouts/BasicLayout";
-import { check, isLogin } from "./utils/auth";
-import NotFound from "./views/exception/404";
-import Forbidden from "./views/exception/403";
+import { check, isLogin } from "../utils/auth";
+import NotFound from "../views/exception/404";
+import Forbidden from "../views/exception/403";
 
 Vue.use(Router);
 
@@ -106,6 +106,8 @@ router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start();
   }
+  document.title = "管理后台";
+
   const record = findLast(to.matched, record => record.meta.authority);
   if (record && !check(record.meta.authority)) {
     if (!isLogin() && to.path !== "/user/login") {
@@ -122,6 +124,7 @@ router.beforeEach((to, from, next) => {
       });
     }
   }
+  next();
   NProgress.done();
 });
 
