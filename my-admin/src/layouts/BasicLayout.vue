@@ -15,6 +15,7 @@
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
           <a-icon
+            v-auth="['admin']"
             class="trigger"
             :type="collapsed ? 'menu-fold' : 'menu-unfold'"
             @click="collapsed = !collapsed"
@@ -29,6 +30,7 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
+    <Authorized>
     <SettintDrawer />
   </div>
 </template>
@@ -72,7 +74,7 @@ export default {
   background: #eeeeee;
 }
 .logo {
-  height: 128px;
+  height: 64px;
   line-height: 64px;
   font-size: 20px;
   color: rgb(50, 124, 4);
