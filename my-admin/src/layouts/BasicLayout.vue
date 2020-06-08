@@ -30,7 +30,7 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <Authorized>
+    <!-- <Authorized> -->
     <SettintDrawer />
   </div>
 </template>
