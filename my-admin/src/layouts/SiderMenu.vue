@@ -69,9 +69,7 @@ export default {
         if (item.meta && item.meta.authority && !check(item.meta.authority)) {
           break;
         }
-        console.log(item);
         if (item.name && !item.hideInMenu) {
-          console.log("test1\n");
           this.openKeysMap[item.path] = parentKeys;
           this.selectedKeysMap[item.path] = [item.path || selectedKey];
           const newItem = { ...item };
