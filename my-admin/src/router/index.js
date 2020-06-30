@@ -64,7 +64,7 @@ const routes = [
   {
     path: "/form",
     name: "form",
-    component: { render: h => h("router-view") },
+    component: Layout,
     meta: { icon: "form", title: "表单", authority: ["admin"] },
     children: [
       {
