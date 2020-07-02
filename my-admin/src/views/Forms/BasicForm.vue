@@ -1,5 +1,5 @@
 <template>
-  <a-form :layout="formLayout">
+  <a-form :layout="formLayout" :form="form">
     <a-form-item
       label="Form Layout"
       :label-col="formItemLayout.labelCol"
@@ -25,14 +25,24 @@
       :label-col="formItemLayout.labelCol"
       :wrapper-col="formItemLayout.wrapperCol"
     >
-      <a-input v-model="FieldA" placeholder="input placeholder" />
+      <a-input
+        v-decorator="[
+          'fieldA',
+          {
+            initialValue: fieldA,
+            rules: [{ required: true, min: 6, message: '必须大于5个字符' }]
+          }
+        ]"
+        placeholder="input
+      placeholder"
+      />
     </a-form-item>
     <a-form-item
       label="Field B"
       :label-col="formItemLayout.labelCol"
       :wrapper-col="formItemLayout.wrapperCol"
     >
-      <a-input v-model="FieldB" placeholder="input placeholder" />
+      <a-input v-decorator="['fieldB']" placeholder="input placeholder" />
     </a-form-item>
     <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
       <a-button type="primary" @click="handleSubmit">
@@ -45,25 +55,19 @@
 <script>
 export default {
   data() {
+    this.form = this.$form.createForm(this);
     return {
       formLayout: "horizontal",
-      FieldA: "",
-      FieldB: "",
-      FieldAStatus: "",
-      FieldAHelp: ""
+      fieldA: "hello",
+      fieldB: ""
     };
   },
-  watch: {
-    FieldA(val) {
-      if (length(val) <= 5) {
-        this.FieldAStatus = "error";
-        this.FieldAHelp = "输入字符不能少于5个";
-      } else {
-        this.FieldAStatus = "";
-        this.FieldAHelp = "";
-      }
-    }
+  mounted() {
+    setTimeout(() => {
+      this.form.setFieldsValue({ fieldA: "hello world" });
+    }, 3000);
   },
+  watch: {},
   computed: {
     formItemLayout() {
       const { formLayout } = this;
@@ -88,12 +92,13 @@ export default {
       this.formLayout = e.target.value;
     },
     handleSubmit() {
-      if (length(this.FieldA) <= 5) {
-        this.FieldAStatus = "error";
-        this.FieldAHelp = "输入字符不能少于5个";
-      } else {
-        console.log("success");
-      }
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values);
+          this.fieldA = values.fieldA;
+          Object.assign(this, values);
+        }
+      });
     }
   }
 };
