@@ -78,7 +78,7 @@ const routes = [
         name: "stepform",
         hideInChildrenMenu: true, // 子路由隐藏掉
         meta: { title: "分布表单" },
-        component: () => import("../views/Forms/stepForm")
+        component: () => import("../views/Forms/StepForm/Step1")
       }
     ]
   },
