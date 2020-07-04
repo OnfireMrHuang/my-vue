@@ -1,7 +1,5 @@
 <template>
-  <div class="footer">
-    注脚
-  </div>
+  <div class="footer"></div>
 </template>
 <script>
 export default {

@@ -1,7 +1,5 @@
 <template>
-  <div class="header">
-    头部
-  </div>
+  <div class="header"></div>
 </template>
 <script>
 export default {
