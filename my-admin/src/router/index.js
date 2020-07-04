@@ -74,11 +74,25 @@ const routes = [
         component: () => import("../views/Forms/BasicForm")
       },
       {
-        path: "/form/step-form",
-        name: "stepform",
+        path: "/form/step-form/info",
+        name: "info",
         hideInChildrenMenu: true, // 子路由隐藏掉
-        meta: { title: "分布表单" },
+        meta: { title: "信息" },
         component: () => import("../views/Forms/StepForm/Step1")
+      },
+      {
+        path: "/form/step-form/confirm",
+        name: "confirm",
+        hideInChildrenMenu: true, // 子路由隐藏掉
+        meta: { title: "确认" },
+        component: () => import("../views/Forms/StepForm/Step2")
+      },
+      {
+        path: "/form/step-form/result",
+        name: "result",
+        hideInChildrenMenu: true, // 子路由隐藏掉
+        meta: { title: "结果" },
+        component: () => import("../views/Forms/StepForm/Step3")
       }
     ]
   },

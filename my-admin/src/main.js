@@ -9,6 +9,7 @@ import {
   Drawer,
   Radio,
   Menu,
+  Select,
   Form,
   Input
 } from "ant-design-vue";
@@ -25,6 +26,7 @@ Vue.use(Radio);
 Vue.use(Menu);
 Vue.use(Form);
 Vue.use(Input);
+Vue.use(Select);
 Vue.component("Authorized", { Authorized });
 Vue.use(Auth);
 

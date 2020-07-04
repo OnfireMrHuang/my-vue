@@ -55,7 +55,7 @@ export default {
       form.validateFields((err, values) => {
         if (!err) {
           $store.dispatch({
-            type: "form/submitStepFormData",
+            type: "form/submitStepForm",
             payload: { ...step, ...values }
           });
         }
